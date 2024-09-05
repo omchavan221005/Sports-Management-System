@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tournaments</title>
+</head>
+<body>
+    <h1>Tournaments</h1>
+    <ul>
+        {% for tournament in tournaments %}
+            <li>
+                <h2>{{ tournament.name }} - {{ tournament.date }}</h2>
+                <p>Winners:</p>
+                <ul>
+                    {% for sport in tournament.sports %}
+                        {% if sport.status == 'completed' %}
+                            <li>{{ sport.name }}: {{ tournament.winners.get(sport.name, 'Not Announced') }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                <a href="{{ url_for('tournament_details', tournament_name=tournament.name) }}">View Details</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('home') }}">Back to Home</a>
+</body>
+</html>
+

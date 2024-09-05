@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Schedule</title>
+</head>
+<body>
+    <h1>Manage Schedule for {{ sport }}</h1>
+    <form action="{{ url_for('manage_schedule', sport=sport) }}" method="POST">
+        <label for="match">Match:</label>
+        <input type="text" id="match" name="match" required><br>
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required><br>
+        <label for="time">Time:</label>
+        <input type="time" id="time" name="time" required><br>
+        <input type="submit" value="Add Match">
+    </form>
+    <a href="{{ url_for('view_schedule', sport=sport) }}">Back to Schedule</a>
+</body>
+</html>

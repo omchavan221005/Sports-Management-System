@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ sport }} Details</title>
+</head>
+<body>
+    <h1>{{ sport }} Details</h1>
+    <h2>Rules and Regulations</h2>
+    <p>{{ rules }}</p>
+    <h2>Schedule</h2>
+    <ul>
+        {% for match in schedule %}
+            <li>{{ match.match }} - {{ match.date }} at {{ match.time }} (Venue: {{ match.venue }})</li>
+        {% endfor %}
+    </ul>
+    {% if sport_status == 'ongoing' %}
+        <h2>Register</h2>
+        <form action="{{ url_for('register', sport=sport) }}" method="post">
+            <label for="player_name">Player Name:</label>
+            <input type="text" id="player_name" name="player_name" required>
+            <button type="submit">Register</button>
+        </form>
+    {% else %}
+        <h2>Registration is closed</h2>
+    {% endif %}
+    <a href="{{ url_for('view_schedule', sport=sport) }}">View Schedule</a>
+    <a href="{{ url_for('view_tournaments') }}">Back to Tournaments</a>
+</body>
+</html>
+
